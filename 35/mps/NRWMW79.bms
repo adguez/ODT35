@@ -1,0 +1,686 @@
+*********************************************************************** 
+* PROYECTO   :                                                        * 
+* DESCRIPCION: B.B.V.A.                                               * 
+*********************************************************************** 
+* AUTOR : CDA-INFORMATICA                                             *
+* CODIGO: NRHW791.                                                    *
+* TITULO: REGISTRO DE CARTA DE INSTRUCCION DE CLIENTES PARA COLOCACION* 
+* FECHA : NOVIEMBRE 2012.                                             *
+*********************************************************************** 
+*                      DATOS DE LA PANTALLA                           * 
+*********************************************************************** 
+* ESTATUS CONTRATO GRUPO INSTRUMENTO EMISORA SERIE CUPON              * 
+*********************************************************************** 
+*                   BITACORA DE MODIFICACIONES                        * 
+*********************************************************************** 
+*                                                                     * 
+*********************************************************************** 
+         PRINT NOGEN                                                            
+NRWMW79 DFHMSD CTRL=(FREEKB,FRSET),                                    -
+               LANG=COBOL,                                             -
+               MODE=INOUT,                                             -
+               STORAGE=AUTO,                                           -
+               TERM=ALL,                                               -
+               TIOAPFX=YES,                                            -
+               TYPE=MAP 
+*                                                                       
+NRWM79  DFHMDI EXTATT=YES,                                             -
+               SIZE=(24,80) 
+*                                                                       
+*        DFHMDF POS=(01,01),LENGTH=02,ATTRB=(NORM,ASKIP),              X
+*              COLOR=TURQUOISE,                                        X
+*              INITIAL='M1'
+*
+*PGMID   DFHMDF POS=(01,04),LENGTH=08,ATTRB=(NORM,ASKIP),              X
+*              COLOR=TURQUOISE,                                        X
+*              INITIAL=' '
+*
+*  MCIA                         - NOMBRE DE COMPANIA / EMPRESA
+*
+*CIA     DFHMDF POS=(01,16),LENGTH=50,                                 X
+*              ATTRB=(PROT,BRT)
+*
+*  MFECHA                       - FECHA DEL DIA
+*
+*FECHA   DFHMDF POS=(01,70),LENGTH=10,                                 X
+*              COLOR=TURQUOISE,                                        X
+*              ATTRB=(NORM,PROT)
+*
+*  MTERM                        - TERMINAL
+*
+*TERM    DFHMDF POS=(02,01),LENGTH=04,                                 X
+*              COLOR=TURQUOISE,                                        X
+*              ATTRB=(NORM,PROT)
+*
+*USER    DFHMDF POS=(02,06),LENGTH=08,                                 X
+*              COLOR=TURQUOISE,                                        X
+*              ATTRB=(NORM,PROT)
+*
+*        DFHMDF POS=(02,29),LENGTH=23,ATTRB=(BRT,PROT),                X
+*              INITIAL='       PROMOCION       '
+*
+*  MHORA                        - HORA DEL DIA
+*
+*HORA    DFHMDF POS=(02,72),LENGTH=08,                                 X
+*              COLOR=TURQUOISE,                                        X
+*              ATTRB=(NORM,PROT)
+*
+****  INICIA *********************************************************
+*
+*        DFHMDF POS=(03,18),LENGTH=40,ATTRB=(BRT,ASKIP),               X
+*              INITIAL='ALTA DE CARTA DE INSTRUCCION DE CLIENTES'
+*
+*        DFHMDF POS=(03,70),LENGTH=06,ATTRB=(NORM,ASKIP),              X
+*              COLOR=TURQUOISE,                                        X
+*              INITIAL='HOJA: '
+*
+*HOJA    DFHMDF POS=(03,77),LENGTH=03,ATTRB=(NORM,ASKIP,NUM),          X
+*              COLOR=TURQUOISE,                                        X
+*              PICOUT='ZZZ'
+*********                                                               
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=24,                                              -
+               POS=(5,1),                                              -
+               INITIAL='CONTRATO:             ¢' 
+MCONTRA DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=YELLOW,                                           -
+               LENGTH=7,                                               -
+               POS=(5,26),                                             -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=1,                                               -
+               POS=(5,34),                                             -
+               INITIAL='!' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=10,                                              -
+               POS=(5,36),                                             -
+               INITIAL='EMISORA: ¢' 
+MEMISOR DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=YELLOW,                                           -
+               LENGTH=7,                                               -
+               POS=(5,47),                                             -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=1,                                               -
+               POS=(5,55),                                             -
+               INITIAL='!' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=23,                                              -
+               POS=(6,1),                                              -
+               INITIAL='GRUPO DE INSTRUMENTO: ¢' 
+MGRUPO  DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=YELLOW,                                           -
+               LENGTH=1,                                               -
+               POS=(6,25),                                             -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=1,                                               -
+               POS=(6,27),                                             -
+               INITIAL='!' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=10,                                              -
+               POS=(6,36),                                             -
+               INITIAL='SERIE  : ¢' 
+MSERIE  DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=YELLOW,                                           -
+               LENGTH=8,                                               -
+               POS=(6,47),                                             -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=1,                                               -
+               POS=(6,56),                                             -
+               INITIAL='!' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=23,                                              -
+               POS=(7,1),                                              -
+               INITIAL='INSTRUMENTO:          ¢' 
+MINSTR  DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=YELLOW,                                           -
+               LENGTH=8,                                               -
+               POS=(7,25),                                             -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=1,                                               -
+               POS=(7,34),                                             -
+               INITIAL='!' 
+*********                                                               
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=5,                                               -
+               POS=(9,1),                                              -
+               INITIAL='ESTAT' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(9,7),                                              -
+               INITIAL='CONTRATO' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=25,                                              -
+               POS=(9,16),                                             -
+               INITIAL='NOMBRE DEL CLIENTE       ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=3,                                               -
+               POS=(9,42),                                             -
+               INITIAL='GPO' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(9,46),                                             -
+               INITIAL='INSTRUM ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(9,55),                                             -
+               INITIAL='EMISORA ' 
+****                                                                    
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=74,                                              -
+               POS=(10,1),                                             -
+               INITIAL='----- -------- ------------------------- --- ---
+               ------ --------------------' 
+****                                                                    
+MSELE01 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               LENGTH=1,                                               -
+               POS=(11,1),                                             -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=3,                                               -
+               POS=(11,3),                                             -
+               INITIAL=' ' 
+MCONT01 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(11,7),                                             -
+               INITIAL=' ' 
+MNOMB01 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=25,                                              -
+               POS=(11,16),                                            -
+               INITIAL=' ' 
+MGRUP01 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=1,                                               -
+               POS=(11,42),                                            -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=1,                                               -
+               POS=(11,44),                                            -
+               INITIAL=' ' 
+MINST01 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(11,46),                                            -
+               INITIAL=' ' 
+MEMIS01 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(11,55),                                            -
+               INITIAL=' ' 
+MSERI01 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(11,63),                                            -
+               INITIAL=' ' 
+****                                                                    
+MSELE02 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               LENGTH=1,                                               -
+               POS=(12,1),                                             -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=3,                                               -
+               POS=(12,3),                                             -
+               INITIAL=' ' 
+MCONT02 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(12,7),                                             -
+               INITIAL=' ' 
+MNOMB02 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=25,                                              -
+               POS=(12,16),                                            -
+               INITIAL=' ' 
+MGRUP02 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=1,                                               -
+               POS=(12,42),                                            -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=1,                                               -
+               POS=(12,44),                                            -
+               INITIAL=' ' 
+MINST02 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(12,46),                                            -
+               INITIAL=' ' 
+MEMIS02 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(12,55),                                            -
+               INITIAL=' ' 
+MSERI02 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(12,63),                                            -
+               INITIAL=' ' 
+****                                                                    
+MSELE03 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               LENGTH=1,                                               -
+               POS=(13,1),                                             -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=3,                                               -
+               POS=(13,3),                                             -
+               INITIAL=' ' 
+MCONT03 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(13,7),                                             -
+               INITIAL=' ' 
+MNOMB03 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=25,                                              -
+               POS=(13,16),                                            -
+               INITIAL=' ' 
+MGRUP03 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=1,                                               -
+               POS=(13,42),                                            -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=1,                                               -
+               POS=(13,44),                                            -
+               INITIAL=' ' 
+MINST03 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(13,46),                                            -
+               INITIAL=' ' 
+MEMIS03 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(13,55),                                            -
+               INITIAL=' ' 
+MSERI03 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(13,63),                                            -
+               INITIAL=' ' 
+****                                                                    
+MSELE04 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               LENGTH=1,                                               -
+               POS=(14,1),                                             -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=3,                                               -
+               POS=(14,3),                                             -
+               INITIAL=' ' 
+MCONT04 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(14,7),                                             -
+               INITIAL=' ' 
+MNOMB04 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=25,                                              -
+               POS=(14,16),                                            -
+               INITIAL=' ' 
+MGRUP04 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=1,                                               -
+               POS=(14,42),                                            -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=1,                                               -
+               POS=(14,44),                                            -
+               INITIAL=' ' 
+MINST04 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(14,46),                                            -
+               INITIAL=' ' 
+MEMIS04 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(14,55),                                            -
+               INITIAL=' ' 
+MSERI04 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(14,63),                                            -
+               INITIAL=' ' 
+****                                                                    
+MSELE05 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               LENGTH=1,                                               -
+               POS=(15,1),                                             -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=3,                                               -
+               POS=(15,3),                                             -
+               INITIAL=' ' 
+MCONT05 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(15,7),                                             -
+               INITIAL=' ' 
+MNOMB05 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=25,                                              -
+               POS=(15,16),                                            -
+               INITIAL=' ' 
+MGRUP05 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=1,                                               -
+               POS=(15,42),                                            -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=1,                                               -
+               POS=(15,44),                                            -
+               INITIAL=' ' 
+MINST05 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(15,46),                                            -
+               INITIAL=' ' 
+MEMIS05 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(15,55),                                            -
+               INITIAL=' ' 
+MSERI05 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(15,63),                                            -
+               INITIAL=' ' 
+****                                                                    
+MSELE06 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               LENGTH=1,                                               -
+               POS=(16,1),                                             -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=3,                                               -
+               POS=(16,3),                                             -
+               INITIAL=' ' 
+MCONT06 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(16,7),                                             -
+               INITIAL=' ' 
+MNOMB06 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=25,                                              -
+               POS=(16,16),                                            -
+               INITIAL=' ' 
+MGRUP06 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=1,                                               -
+               POS=(16,42),                                            -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=1,                                               -
+               POS=(16,44),                                            -
+               INITIAL=' ' 
+MINST06 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(16,46),                                            -
+               INITIAL=' ' 
+MEMIS06 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(16,55),                                            -
+               INITIAL=' ' 
+MSERI06 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(16,63),                                            -
+               INITIAL=' ' 
+****                                                                    
+MSELE07 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               LENGTH=1,                                               -
+               POS=(17,1),                                             -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=3,                                               -
+               POS=(17,3),                                             -
+               INITIAL=' ' 
+MCONT07 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(17,7),                                             -
+               INITIAL=' ' 
+MNOMB07 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=25,                                              -
+               POS=(17,16),                                            -
+               INITIAL=' ' 
+MGRUP07 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=1,                                               -
+               POS=(17,42),                                            -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=1,                                               -
+               POS=(17,44),                                            -
+               INITIAL=' ' 
+MINST07 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(17,46),                                            -
+               INITIAL=' ' 
+MEMIS07 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(17,55),                                            -
+               INITIAL=' ' 
+MSERI07 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(17,63),                                            -
+               INITIAL=' ' 
+****                                                                    
+MSELE08 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               LENGTH=1,                                               -
+               POS=(18,1),                                             -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=3,                                               -
+               POS=(18,3),                                             -
+               INITIAL=' ' 
+MCONT08 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(18,7),                                             -
+               INITIAL=' ' 
+MNOMB08 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=25,                                              -
+               POS=(18,16),                                            -
+               INITIAL=' ' 
+MGRUP08 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=1,                                               -
+               POS=(18,42),                                            -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=1,                                               -
+               POS=(18,44),                                            -
+               INITIAL=' ' 
+MINST08 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(18,46),                                            -
+               INITIAL=' ' 
+MEMIS08 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(18,55),                                            -
+               INITIAL=' ' 
+MSERI08 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(18,63),                                            -
+               INITIAL=' ' 
+****                                                                    
+MSELE09 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               LENGTH=1,                                               -
+               POS=(19,1),                                             -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=3,                                               -
+               POS=(19,3),                                             -
+               INITIAL=' ' 
+MCONT09 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(19,7),                                             -
+               INITIAL=' ' 
+MNOMB09 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=25,                                              -
+               POS=(19,16),                                            -
+               INITIAL=' ' 
+MGRUP09 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=1,                                               -
+               POS=(19,42),                                            -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=1,                                               -
+               POS=(19,44),                                            -
+               INITIAL=' ' 
+MINST09 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(19,46),                                            -
+               INITIAL=' ' 
+MEMIS09 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(19,55),                                            -
+               INITIAL=' ' 
+MSERI09 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(19,63),                                            -
+               INITIAL=' ' 
+****                                                                    
+MSELE10 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               LENGTH=1,                                               -
+               POS=(20,1),                                             -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=3,                                               -
+               POS=(20,3),                                             -
+               INITIAL=' ' 
+MCONT10 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(20,7),                                             -
+               INITIAL=' ' 
+MNOMB10 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=25,                                              -
+               POS=(20,16),                                            -
+               INITIAL=' ' 
+MGRUP10 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=1,                                               -
+               POS=(20,42),                                            -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               LENGTH=1,                                               -
+               POS=(20,44),                                            -
+               INITIAL=' ' 
+MINST10 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(20,46),                                            -
+               INITIAL=' ' 
+MEMIS10 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=7,                                               -
+               POS=(20,55),                                            -
+               INITIAL=' ' 
+MSERI10 DFHMDF ATTRB=(FSET,NORM,PROT),                                 -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=8,                                               -
+               POS=(20,63),                                            -
+               INITIAL=' ' 
+****                                                                    
+****                                                                    
+*                                                                       
+****  FIN    *********************************************************  
+*                                                                       
+*SG0     DFHMDF POS=(21,01),LENGTH=79,ATTRB=(NORM,PROT,FSET),           
+*              COLOR=TURQUOISE,                                         
+*              INITIAL=' '                                              
+*                                                                       
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=9,                                               -
+               POS=(22,1),                                             -
+               INITIAL='COMANDO:¢' 
+*                                                                       
+*  MCOMANDO                     - COMANDO                               
+*                                                                       
+MCOM    DFHMDF ATTRB=(FSET,NORM,UNPROT),                               -
+               JUSTIFY=(BLANK,LEFT),                                   -
+               LENGTH=10,                                              -
+               POS=(22,11),                                            -
+               INITIAL=' ' 
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=1,                                               -
+               POS=(22,22),                                            -
+               INITIAL='!' 
+*                                                                       
+*  MSG1                         - MENSAJE 1 COMPLEMENTO                 
+*                                                                       
+MSG1    DFHMDF ATTRB=(ASKIP,BRT),                                      -
+               LENGTH=55,                                              -
+               POS=(22,24) 
+*                                                                       
+*  MSG2                         - MENSAJE GENERAL SIVA                  
+*                                                                       
+        DFHMDF ATTRB=(ASKIP,BRT),                                      -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=3,                                               -
+               POS=(23,1),                                             -
+               INITIAL='==>' 
+*                                                                       
+MSG2    DFHMDF ATTRB=(NORM,PROT),                                      -
+               COLOR=RED,                                              -
+               LENGTH=74,                                              -
+               POS=(23,5) 
+*                                                                       
+        DFHMDF ATTRB=(NORM,PROT),                                      -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=37,                                              -
+               POS=(24,1),                                             -
+               INITIAL='PF2=TRANSF PF3=MENU PF4=CONF PF5=REIN' 
+*                                                                       
+        DFHMDF ATTRB=(NORM,PROT),                                      -
+               COLOR=TURQUOISE,                                        -
+               LENGTH=41,                                              -
+               POS=(24,39),                                            -
+               INITIAL='                            ENTER=EJECUTA' 
+        DFHMSD TYPE=FINAL
+*                                                                       
+*FINAL DEL MAPA NRHW791
+*                                                                       
+        END
